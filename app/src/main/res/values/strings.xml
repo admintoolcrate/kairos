@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Kairos</string>
+    <string name="tile_label">Kairos</string>
+    <string name="widget_description">Two buttons: ride out an urge, or panic help.</string>
+    <string name="shortcut_panic_short">Panic help</string>
+    <string name="shortcut_panic_long">Panic help: breathe slowly</string>
+    <string name="shortcut_urge10_short">Urge, 10 min</string>
+    <string name="shortcut_urge10_long">Ride out an urge for 10 minutes</string>
+    <string name="shortcut_urge20_short">Urge, 20 min</string>
+    <string name="shortcut_urge20_long">Ride out an urge for 20 minutes</string>
 </resources>

@@ -58,9 +58,13 @@ class MainActivity : ComponentActivity() {
 
     private fun routeFor(intent: Intent?): String? = when (intent?.getStringExtra(EXTRA_START)) {
         START_PANIC -> { openPanic(); null }
-        START_URGE -> Routes.urge(intent.getIntExtra(EXTRA_MINUTES, -1), auto = intent.getIntExtra(EXTRA_MINUTES, -1) > 0)
+        START_URGE -> minutesOf(intent).let { Routes.urge(it, auto = it > 0) }
         else -> null
     }
+
+    /** Minutes arrive as an Int from our own code, or as a String from static shortcuts. */
+    private fun minutesOf(intent: Intent): Int =
+        intent.extras?.let { it.getString(EXTRA_MINUTES)?.toIntOrNull() ?: it.getInt(EXTRA_MINUTES, -1) } ?: -1
 
     private fun openPanic() = startActivity(PanicActivity.intent(this))
 
