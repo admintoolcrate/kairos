@@ -20,6 +20,7 @@
         android:name=".KairosApp"
         android:allowBackup="false"
         android:fullBackupContent="false"
+        android:dataExtractionRules="@xml/data_extraction_rules"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -49,7 +50,6 @@
             android:taskAffinity="cc.toolcrate.kairos.panic"
             android:showWhenLocked="true"
             android:turnScreenOn="true"
-            android:screenOrientation="unspecified"
             android:theme="@style/Theme.Kairos.Panic" />
 
         <!-- Quick Settings tile; usable from the lock screen. -->

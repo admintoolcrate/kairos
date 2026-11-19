@@ -20,7 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
+import androidx.activity.compose.LocalActivity
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
@@ -38,7 +38,7 @@ fun LockGate(lock: AppLock, secrets: LockSecrets?, onBack: () -> Unit, content: 
     if (secrets == null) return // still loading; a blank frame for a few ms
     if (!secrets.enabled || unlocked) { content(); return }
 
-    val activity = LocalContext.current as? FragmentActivity
+    val activity = LocalActivity.current as? FragmentActivity
     val canBio = secrets.biometric && activity != null && AppLock.biometricAvailable(activity)
     LaunchedEffect(Unit) { if (canBio) lock.prompt(activity!!) {} }
 

@@ -33,8 +33,7 @@ class KairosTileService : TileService() {
     override fun onStartListening() {
         super.onStartListening()
         scope.launch {
-            val s = prefs.current()
-            mode = if (s.onboardingDone || s.lastMode == Mode.Urge) s.lastMode else Mode.Panic
+            mode = prefs.lastUsedMode() ?: Mode.Panic
             refresh()
         }
         refresh()

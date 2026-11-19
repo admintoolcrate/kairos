@@ -2,7 +2,6 @@
 <resources>
     <color name="paper_page">#F4EDE0</color>
     <color name="paper_ink">#2A211C</color>
-    <color name="paper_accent">#7A5A3A</color>
     <color name="paper_night_page">#1B1613</color>
     <color name="paper_night_ink">#EDE4D3</color>
     <color name="page">@color/paper_page</color>

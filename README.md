@@ -14,6 +14,18 @@ encrypted backup to your own Google Drive.
 Kairos is a self-help tool, not medical care. If you have chest pain or trouble
 breathing, call your local emergency number.
 
+## Getting there fast
+
+Home-screen widget, a Quick Settings tile (works from the lock screen), and app
+shortcuts for panic help or a 10/20 minute urge timer. Panic help is never behind
+the optional app lock.
+
+## Stagira
+
+If [Stagira](https://github.com/admintoolcrate/stagira) is installed, Kairos can offer to
+note an urge you rode out there. It uses an Android intent on your phone; nothing goes
+through a server, and Stagira asks you to confirm.
+
 ## Build
 
 ```

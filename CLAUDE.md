@@ -75,3 +75,21 @@ headings (display/headline/titleLarge), Inter for body and labels. Fonts are OFL
 - Before every commit: `./gradlew assembleDebug testDebugUnitTest` must pass.
 - Commit after each milestone on branch `claude/kairos-android-architecture-ap2l0b`.
 - The SDK path comes from `local.properties` (`sdk.dir=`), which is git-ignored.
+
+## Stagira bridge (contract)
+- Kairos sends an explicit intent: action `cc.toolcrate.stagira.action.RECORD_URGE`,
+  package `cc.toolcrate.stagira`, extras `source` = `"kairos"`, `at` = epoch millis.
+- Stagira's `RecordUrgeActivity` always asks the person to confirm and pick a goal,
+  respects Stagira's app lock, accepts only today/yesterday, and returns only
+  `RESULT_OK`/`RESULT_CANCELED`. Kairos marks `sentToStagira` only on `RESULT_OK`.
+- The option is offered only when Stagira resolves the intent and the setting is on.
+  Never send anything else to Stagira, and never add a server.
+
+## Testing on a device (can't be done in CI here)
+- Cold start: `adb shell am force-stop cc.toolcrate.kairos` then
+  `adb shell am start -W -n cc.toolcrate.kairos/app.kairos.panic.PanicActivity`; `TotalTime` < 2000.
+- Lock the phone, open Quick Settings, tap Kairos: panic help must appear over the lock screen.
+- Turn on app lock, then confirm panic help, urge mode, the tile, widget and shortcuts all
+  open without asking for the PIN, while History and Settings do ask.
+- TalkBack: breathing phases are announced ("Breathe in" / "Breathe out"), the per-second
+  count is not. Font size at largest: nothing clipped, everything scrolls.

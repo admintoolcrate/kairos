@@ -24,7 +24,8 @@ import javax.inject.Singleton
 /** Everything the user has chosen. Secrets (PIN hash, salt) are kept out of exports. */
 @Serializable
 data class Settings(
-    val lastMode: Mode = Mode.Urge,
+    /** Null until a mode has actually been used. */
+    val lastMode: Mode? = null,
     val urgeMinutes: Int = 10,
     val inhaleSeconds: Int = BreathPattern.Default.inhaleSeconds,
     val exhaleSeconds: Int = BreathPattern.Default.exhaleSeconds,
@@ -83,10 +84,13 @@ class Prefs @Inject constructor(@ApplicationContext private val context: Context
 
     suspend fun current(): Settings = settings.first()
 
+    /** The mode actually used last, or null on a fresh install (no default filled in). */
+    suspend fun lastUsedMode(): Mode? = current().lastMode
+
     suspend fun update(change: (Settings) -> Settings) {
         context.store.edit { p ->
             val s = change(p.toSettings())
-            p[K.lastMode] = s.lastMode.name
+            s.lastMode?.let { p[K.lastMode] = it.name }
             p[K.urgeMinutes] = s.urgeMinutes
             val pattern = BreathPattern.of(s.inhaleSeconds, s.exhaleSeconds)
             p[K.inhale] = pattern.inhaleSeconds
@@ -115,7 +119,7 @@ class Prefs @Inject constructor(@ApplicationContext private val context: Context
     }
 
     private fun Preferences.toSettings() = Settings(
-        lastMode = enumOr(this[K.lastMode], Mode.Urge),
+        lastMode = this[K.lastMode]?.let { n -> Mode.entries.firstOrNull { it.name == n } },
         urgeMinutes = this[K.urgeMinutes] ?: 10,
         inhaleSeconds = this[K.inhale] ?: BreathPattern.Default.inhaleSeconds,
         exhaleSeconds = this[K.exhale] ?: BreathPattern.Default.exhaleSeconds,

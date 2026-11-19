@@ -31,7 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.semantics.LiveRegionMode
-import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.selected
 import androidx.compose.ui.semantics.semantics
@@ -187,7 +187,8 @@ private fun GroundPage(vm: PanicViewModel) {
             "${prompt.count}",
             style = MaterialTheme.typography.displayLarge,
             color = MaterialTheme.colorScheme.secondary,
-            modifier = Modifier.semantics { contentDescription = "" },
+            // The number is read as part of the counter below.
+            modifier = Modifier.clearAndSetSemantics { },
         )
         Text(
             prompt.instruction(),

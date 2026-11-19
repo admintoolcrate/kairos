@@ -38,6 +38,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
@@ -232,14 +233,16 @@ private fun Running(
 private fun CountdownRing(progress: Float, label: String, paused: Boolean) {
     val track = MaterialTheme.colorScheme.outlineVariant
     val ink = MaterialTheme.colorScheme.secondary
+    // Grow with the font size so large text never spills out of the ring.
+    val ring = 240.dp * LocalDensity.current.fontScale.coerceIn(1f, 1.8f)
     Box(
-        Modifier.size(240.dp).semantics {
+        Modifier.size(ring).semantics {
             contentDescription = "Time left"
             stateDescription = if (paused) "$label, paused" else label
         },
         contentAlignment = Alignment.Center,
     ) {
-        Canvas(Modifier.size(240.dp)) {
+        Canvas(Modifier.size(ring)) {
             val w = 6.dp.toPx()
             drawCircle(track, radius = size.minDimension / 2 - w, style = Stroke(w / 3))
             drawArc(

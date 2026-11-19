@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
@@ -117,8 +118,8 @@ fun BreathingGuide(
                 "${frame.secondsLeftInPhase} of $secs",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
-                // The count changes every second; announcing it would be noisy.
-                modifier = Modifier.semantics { contentDescription = "" },
+                // The count changes every second; TalkBack hears only the phase words.
+                modifier = Modifier.clearAndSetSemantics { },
             )
         }
     }
