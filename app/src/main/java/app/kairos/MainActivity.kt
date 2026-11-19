@@ -3,48 +3,78 @@ package app.kairos
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
-import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import app.kairos.data.Prefs
+import app.kairos.lock.AppLock
 import app.kairos.panic.PanicActivity
 import app.kairos.ui.nav.KairosNav
 import app.kairos.ui.nav.Routes
 import app.kairos.ui.theme.KairosTheme
+import app.kairos.ui.theme.MotionPref
+import app.kairos.ui.theme.ThemeMode
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**
+ * Home, urge mode, history and settings. A FragmentActivity only so BiometricPrompt
+ * can attach; app lock is applied per screen (history and settings) by LockGate,
+ * never to home or urge mode.
+ */
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
     @Inject lateinit var prefs: Prefs
+    @Inject lateinit var lock: AppLock
 
     /** A pending deep link (from the widget, tile or a shortcut) to act on once composed. */
     private var pending by mutableStateOf<String?>(null)
+    private var launchedPlain = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        if (savedInstanceState == null) pending = routeFor(intent)
+        lock.observeProcess()
+        if (savedInstanceState == null) {
+            pending = routeFor(intent)
+            launchedPlain = pending == null && intent?.getStringExtra(EXTRA_START) == null
+        }
         setContent {
             val settings by prefs.settings.collectAsStateWithLifecycle(initialValue = null)
-            KairosTheme(settings?.theme ?: app.kairos.ui.theme.ThemeMode.System, settings?.motion ?: app.kairos.ui.theme.MotionPref.System) {
+            val scope = rememberCoroutineScope()
+            KairosTheme(settings?.theme ?: ThemeMode.System, settings?.motion ?: MotionPref.System) {
                 Surface(Modifier.fillMaxSize()) {
                     val nav = rememberNavController()
-                    KairosNav(nav, Routes.Home, onPanic = ::openPanic, stagira = null)
+                    KairosNav(
+                        nav, Routes.Home,
+                        onPanic = ::openPanic,
+                        onOnboarded = { scope.launch { prefs.update { it.copy(onboardingDone = true) } } },
+                        stagira = null,
+                        stagiraInstalled = false,
+                    )
                     LaunchedEffect(pending) {
                         pending?.let { nav.navigate(it) { launchSingleTop = true } }
                         pending = null
+                    }
+                    // First run from the launcher: a short welcome. Never in the way of a widget or tile.
+                    LaunchedEffect(settings?.onboardingDone) {
+                        if (launchedPlain && settings?.onboardingDone == false) {
+                            launchedPlain = false
+                            nav.navigate(Routes.Onboarding) { popUpTo(Routes.Home) { inclusive = true } }
+                        }
                     }
                 }
             }

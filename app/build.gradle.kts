@@ -81,6 +81,7 @@ dependencies {
     implementation(libs.glance)
     implementation(libs.glance.material3)
     implementation(libs.biometric)
+    implementation(libs.fragment)
     implementation(libs.splashscreen)
     implementation(libs.profileinstaller)
     implementation(libs.serialization.json)
