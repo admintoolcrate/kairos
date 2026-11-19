@@ -1,6 +1,5 @@
 package app.kairos.data
 
-import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
@@ -8,12 +7,10 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
-import androidx.datastore.preferences.preferencesDataStore
 import app.kairos.engine.BreathPattern
 import app.kairos.engine.CrisisLine
 import app.kairos.ui.theme.MotionPref
 import app.kairos.ui.theme.ThemeMode
-import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
@@ -49,10 +46,8 @@ data class Settings(
 /** App-lock secrets, stored separately and never exported. */
 data class LockSecrets(val enabled: Boolean, val biometric: Boolean, val pinHash: String, val pinSalt: String)
 
-private val Context.store: DataStore<Preferences> by preferencesDataStore("kairos")
-
 @Singleton
-class Prefs @Inject constructor(@ApplicationContext private val context: Context) {
+class Prefs @Inject constructor(private val store: DataStore<Preferences>) {
 
     private object K {
         val lastMode = stringPreferencesKey("lastMode")
@@ -76,9 +71,9 @@ class Prefs @Inject constructor(@ApplicationContext private val context: Context
         val pinSalt = stringPreferencesKey("pinSalt")
     }
 
-    val settings: Flow<Settings> = context.store.data.map { it.toSettings() }
+    val settings: Flow<Settings> = store.data.map { it.toSettings() }
 
-    val lock: Flow<LockSecrets> = context.store.data.map {
+    val lock: Flow<LockSecrets> = store.data.map {
         LockSecrets(it[K.lockOn] ?: false, it[K.lockBio] ?: true, it[K.pinHash] ?: "", it[K.pinSalt] ?: "")
     }
 
@@ -88,7 +83,7 @@ class Prefs @Inject constructor(@ApplicationContext private val context: Context
     suspend fun lastUsedMode(): Mode? = current().lastMode
 
     suspend fun update(change: (Settings) -> Settings) {
-        context.store.edit { p ->
+        store.edit { p ->
             val s = change(p.toSettings())
             s.lastMode?.let { p[K.lastMode] = it.name }
             p[K.urgeMinutes] = s.urgeMinutes
@@ -110,7 +105,7 @@ class Prefs @Inject constructor(@ApplicationContext private val context: Context
     }
 
     suspend fun setLock(secrets: LockSecrets) {
-        context.store.edit {
+        store.edit {
             it[K.lockOn] = secrets.enabled
             it[K.lockBio] = secrets.biometric
             it[K.pinHash] = secrets.pinHash

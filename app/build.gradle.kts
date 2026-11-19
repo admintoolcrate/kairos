@@ -36,6 +36,8 @@ android {
     }
     testOptions {
         unitTests.isReturnDefaultValues = true
+        // Behaviour tests and screenshots run the real screens under Robolectric, fonts included.
+        unitTests.isIncludeAndroidResources = true
     }
     lint {
         abortOnError = false
@@ -44,6 +46,15 @@ android {
 
 kotlin {
     compilerOptions { jvmTarget.set(org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17) }
+}
+
+// Screenshots are drawn only when asked for: ./gradlew testDebugUnitTest -Pscreenshots=true
+// (into app/build/screenshots). Behaviour tests in app/src/test/.../ui run every time.
+tasks.withType<Test>().configureEach {
+    val screenshots = providers.gradleProperty("screenshots").getOrElse("false")
+    systemProperty("screenshots", screenshots)
+    if (screenshots != "true") exclude("**/screenshots/**")
+    maxHeapSize = "3g"
 }
 
 ksp {
@@ -86,4 +97,12 @@ dependencies {
 
     testImplementation(libs.junit)
     testImplementation(libs.coroutines.test)
+    testImplementation(composeBom)
+    testImplementation(libs.robolectric)
+    testImplementation(libs.compose.ui.test.junit4)
+    testImplementation(libs.hilt.android.testing)
+    testImplementation(libs.androidx.test.core)
+    testImplementation(libs.org.json)
+    kspTest(libs.hilt.compiler)
+    debugImplementation(libs.compose.ui.test.manifest)
 }
