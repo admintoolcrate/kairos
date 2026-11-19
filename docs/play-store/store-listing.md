@@ -6,7 +6,7 @@ Rules for all store text: no medical claims, no diagnosis, no "treats", "cures",
 **App name** (max 30): `Kairos`
 
 **Short description** (max 80):
-`Calm tools for urges, cravings and panic. Free, offline, no ads, no accounts.`
+`Calm tools for hard moments. Free, offline, no ads, no accounts.`
 
 **Full description** (max 4000):
 

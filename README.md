@@ -1,6 +1,6 @@
 # Kairos
 
-Calm tools for urges, cravings and panic. Free, offline, no ads, no accounts.
+Calm tools for hard moments. Free, offline, no ads, no accounts.
 
 - **Urge mode** — a 10 or 20 minute countdown with a calm message, a short breathing
   guide and a few distractions. Afterwards, note whether the urge passed.

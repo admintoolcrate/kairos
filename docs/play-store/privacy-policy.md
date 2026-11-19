@@ -6,7 +6,7 @@ title: Kairos privacy policy
 
 *Last updated: 20 November 2026*
 
-Kairos is a free app with calm tools for urges, cravings and panic. It is made by
+Kairos is a free app with calm tools for hard moments. It is made by
 ToolCrate. This policy explains what happens to your information. The short version:
 **everything stays on your phone, unless you choose to back it up to your own Google Drive,
 and then it is encrypted with a passphrase only you know.**
