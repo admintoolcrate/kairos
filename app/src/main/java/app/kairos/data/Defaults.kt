@@ -2,16 +2,20 @@ package app.kairos.data
 
 /**
  * Built-in wording. Plain, calm, and free of medical claims or promises.
- * Users are encouraged to replace the cards with their own words.
+ *
+ * Kairos never tells someone what they are experiencing ("this is a panic attack")
+ * or that they are safe: it can't know either. The built-in cards are written in the
+ * person's own voice, about breathing, noticing and waiting. People are encouraged to
+ * replace them with their own words, which may say whatever they choose.
  */
 object Defaults {
     val reassuranceCards = listOf(
-        "This is a panic attack. It peaks and passes. You are safe.",
-        "I have felt this before, and it passed.",
-        "My body is sounding a false alarm. I can let it ring itself out.",
+        "One breath at a time. That's all I need to do right now.",
         "I don't have to fight this feeling. I can let it rise and fall.",
         "Breathe out slowly. Nothing needs to happen right now.",
-        "I am safe enough in this moment.",
+        "I can feel my feet on the floor and the air on my skin.",
+        "Feelings come and go. I can wait and watch this one.",
+        "This is hard, and I'm doing my best.",
     )
 
     val distractions = listOf(
@@ -29,9 +33,9 @@ object Defaults {
     val urgeMessages = listOf(
         "Urges rise, crest and fall, like a wave.",
         "You don't have to act on this. You only have to wait.",
-        "This feeling is strong, and it is temporary.",
+        "This feeling is strong. You don't have to do anything with it.",
         "Notice the urge. You don't have to obey it.",
-        "You've ridden these out before.",
+        "One minute at a time is enough.",
         "Waiting is enough. You're doing it right now.",
         "Let it be here. It will move on.",
     )

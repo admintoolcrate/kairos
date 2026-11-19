@@ -85,7 +85,7 @@ class PanicSafetyTest {
         compose.onNodeWithText("If you have chest pain or trouble breathing, call emergency services.").assertExists()
         compose.onNodeWithText("Words").performClick()
         compose.settle()
-        compose.onNodeWithText("This is a panic attack. It peaks and passes. You are safe.").assertExists()
+        compose.onNodeWithText("One breath at a time. That's all I need to do right now.").assertExists()
     }
 
     @Test fun `check-in afterwards can be skipped and then panic help closes`() {

@@ -12,6 +12,10 @@ and **Panic** (paced breathing, 5-4-3-2-1 grounding, reassurance cards, call som
 - Self-help tool, **not medical care or diagnosis**. No medical claims, no treatment
   promises, no "cures", no "clinically proven". The disclaimer (onboarding + settings)
   must say to call emergency services for chest pain or trouble breathing.
+- Never tell the person what they're experiencing ("this is a panic attack", "a false
+  alarm") and never promise they're safe or that it will pass: Kairos can't know.
+  Built-in copy talks about breathing, noticing and waiting, in the person's own voice.
+  `CopyTest` keeps those phrases out; the person's own cards may say anything.
 
 ## Tone and safety rules (enforced in review)
 - Nothing that raises anxiety: no loud or sudden sounds, no red, no alert styling, no
