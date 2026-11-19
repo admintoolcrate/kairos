@@ -50,7 +50,8 @@ and **Panic** (paced breathing, 5-4-3-2-1 grounding, reassurance cards, call som
 
 ## Stack
 Kotlin 2.2, Jetpack Compose (Material 3), Hilt (KSP), Room, DataStore Preferences,
-Glance app widgets, kotlinx.serialization, WorkManager, AndroidX Biometric.
+Glance app widgets, kotlinx.serialization, AndroidX Biometric, Play Services Identity
+(only for Drive authorisation).
 AGP 8.11, Gradle 8.14, compile/target SDK 36, **min SDK 26**. Versions live in
 `gradle/libs.versions.toml`.
 

@@ -17,8 +17,6 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "0.1.0"
-        // Google Drive backup needs an OAuth web client id; empty means "not configured".
-        buildConfigField("String", "DRIVE_CLIENT_ID", "\"${project.findProperty("kairos.driveClientId") ?: ""}\"")
     }
 
     buildTypes {
@@ -70,8 +68,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.compiler)
     implementation(libs.hilt.navigation.compose)
-    implementation(libs.hilt.work)
-    ksp(libs.hilt.androidx.compiler)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
@@ -86,7 +82,6 @@ dependencies {
     implementation(libs.profileinstaller)
     implementation(libs.serialization.json)
     implementation(libs.coroutines.android)
-    implementation(libs.work.runtime)
     implementation(libs.play.auth)
 
     testImplementation(libs.junit)

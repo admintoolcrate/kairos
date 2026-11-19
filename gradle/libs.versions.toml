@@ -18,7 +18,6 @@ splash = "1.0.1"
 profileinstaller = "1.4.1"
 serialization = "1.9.0"
 coroutines = "1.10.2"
-work = "2.10.3"
 playAuth = "21.3.0"
 junit = "4.13.2"
 
@@ -38,8 +37,6 @@ navigation-compose = { module = "androidx.navigation:navigation-compose", versio
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
 hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltAndroidx" }
-hilt-work = { module = "androidx.hilt:hilt-work", version.ref = "hiltAndroidx" }
-hilt-androidx-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltAndroidx" }
 room-runtime = { module = "androidx.room:room-runtime", version.ref = "room" }
 room-ktx = { module = "androidx.room:room-ktx", version.ref = "room" }
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
@@ -53,7 +50,6 @@ profileinstaller = { module = "androidx.profileinstaller:profileinstaller", vers
 serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "serialization" }
 coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "coroutines" }
 coroutines-test = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-test", version.ref = "coroutines" }
-work-runtime = { module = "androidx.work:work-runtime-ktx", version.ref = "work" }
 play-auth = { module = "com.google.android.gms:play-services-auth", version.ref = "playAuth" }
 junit = { module = "junit:junit", version.ref = "junit" }
 

@@ -11,6 +11,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import app.kairos.backup.BackupScreen
 import app.kairos.lock.LockGate
 import app.kairos.ui.history.HistoryScreen
 import app.kairos.ui.home.HomeScreen
@@ -88,7 +89,7 @@ fun KairosNav(
         }
         composable(Routes.History) { locked { HistoryScreen(onBack = back) } }
         settings(SettingsRoutes.Index, locked) { vm ->
-            SettingsIndex(vm, back, { nav.navigate(it) }, showStagira = stagiraInstalled, showBackup = false)
+            SettingsIndex(vm, back, { nav.navigate(it) }, showStagira = stagiraInstalled)
         }
         settings(SettingsRoutes.Cards, locked) { CardsScreen(it, back) }
         settings(SettingsRoutes.Contacts, locked) { ContactsScreen(it, back) }
@@ -100,6 +101,7 @@ fun KairosNav(
         settings(SettingsRoutes.Lock, locked) { LockScreen(it, back) }
         settings(SettingsRoutes.Stagira, locked) { StagiraSettingsScreen(it, back) }
         settings(SettingsRoutes.About, locked) { AboutScreen(back) }
+        settings(SettingsRoutes.Backup, locked) { BackupScreen(back) }
         extra(back, locked)
     }
 }
