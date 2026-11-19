@@ -17,6 +17,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import app.kairos.data.Prefs
+import app.kairos.panic.PanicActivity
 import app.kairos.ui.nav.KairosNav
 import app.kairos.ui.nav.Routes
 import app.kairos.ui.theme.KairosTheme
@@ -56,18 +57,18 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun routeFor(intent: Intent?): String? = when (intent?.getStringExtra(EXTRA_START)) {
+        START_PANIC -> { openPanic(); null }
         START_URGE -> Routes.urge(intent.getIntExtra(EXTRA_MINUTES, -1), auto = intent.getIntExtra(EXTRA_MINUTES, -1) > 0)
         else -> null
     }
 
-    private fun openPanic() {
-        // Panic help arrives in the next milestone.
-    }
+    private fun openPanic() = startActivity(PanicActivity.intent(this))
 
     companion object {
         const val EXTRA_START = "app.kairos.START"
         const val EXTRA_MINUTES = "app.kairos.MINUTES"
         const val START_URGE = "urge"
+        const val START_PANIC = "panic"
 
         fun urgeIntent(context: Context, minutes: Int = -1): Intent =
             Intent(context, MainActivity::class.java)

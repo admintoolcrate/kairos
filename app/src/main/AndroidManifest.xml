@@ -30,5 +30,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--
+            Panic help: its own task so it can open over the lock screen without
+            bringing the rest of the app (or the app lock) along. Never locked.
+        -->
+        <activity
+            android:name=".panic.PanicActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:taskAffinity="cc.toolcrate.kairos.panic"
+            android:showWhenLocked="true"
+            android:turnScreenOn="true"
+            android:screenOrientation="unspecified"
+            android:theme="@style/Theme.Kairos.Panic" />
     </application>
 </manifest>
