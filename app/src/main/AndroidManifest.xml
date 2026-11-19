@@ -9,6 +9,13 @@
     <!-- No ads, no advertising id: make sure no library brings it back. -->
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove" />
 
+    <!-- Only to check whether Stagira is installed, for the optional "record in Stagira". -->
+    <queries>
+        <intent>
+            <action android:name="cc.toolcrate.stagira.action.RECORD_URGE" />
+        </intent>
+    </queries>
+
     <application
         android:name=".KairosApp"
         android:allowBackup="false"

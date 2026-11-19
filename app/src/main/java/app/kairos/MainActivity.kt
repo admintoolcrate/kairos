@@ -17,7 +17,13 @@ import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.FragmentActivity
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.remember
+import androidx.lifecycle.lifecycleScope
 import app.kairos.data.Prefs
+import app.kairos.data.SessionRepository
+import app.kairos.stagira.StagiraBridge
+import app.kairos.ui.urge.StagiraOffer
 import app.kairos.lock.AppLock
 import app.kairos.panic.PanicActivity
 import app.kairos.ui.nav.KairosNav
@@ -39,6 +45,20 @@ class MainActivity : FragmentActivity() {
     @Inject lateinit var prefs: Prefs
     @Inject lateinit var lock: AppLock
 
+    @Inject lateinit var sessions: SessionRepository
+
+    private var stagiraSession: Long? = null
+    private val stagiraLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { r ->
+        val id = stagiraSession
+        stagiraSession = null
+        if (r.resultCode == RESULT_OK && id != null) lifecycleScope.launch { sessions.markSentToStagira(id) }
+    }
+
+    private fun recordInStagira(sessionId: Long?) {
+        stagiraSession = sessionId
+        runCatching { stagiraLauncher.launch(StagiraBridge.intent()) }
+    }
+
     /** A pending deep link (from the widget, tile or a shortcut) to act on once composed. */
     private var pending by mutableStateOf<String?>(null)
     private var launchedPlain = false
@@ -58,12 +78,13 @@ class MainActivity : FragmentActivity() {
             KairosTheme(settings?.theme ?: ThemeMode.System, settings?.motion ?: MotionPref.System) {
                 Surface(Modifier.fillMaxSize()) {
                     val nav = rememberNavController()
+                    val stagiraInstalled = remember { StagiraBridge.isAvailable(this@MainActivity) }
                     KairosNav(
                         nav, Routes.Home,
                         onPanic = ::openPanic,
                         onOnboarded = { scope.launch { prefs.update { it.copy(onboardingDone = true) } } },
-                        stagira = null,
-                        stagiraInstalled = false,
+                        stagira = if (stagiraInstalled && settings?.stagira == true) StagiraOffer(::recordInStagira) else null,
+                        stagiraInstalled = stagiraInstalled,
                     )
                     LaunchedEffect(pending) {
                         pending?.let { nav.navigate(it) { launchSingleTop = true } }
