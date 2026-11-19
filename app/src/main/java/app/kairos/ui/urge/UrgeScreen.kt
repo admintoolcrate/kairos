@@ -20,7 +20,8 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.FilterChip
@@ -188,6 +189,11 @@ private fun Running(
             return@Column
         }
 
+        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
+            QuietButton(if (timer.isPaused) "Resume" else "Pause", if (timer.isPaused) onResume else onPause, Modifier.weight(1f))
+            QuietButton("I'm done", onDone, Modifier.weight(1f))
+        }
+
         if (breathing) {
             BreathingGuide(
                 pattern = pattern,
@@ -208,7 +214,7 @@ private fun Running(
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             modifier = Modifier.fillMaxWidth(),
         )
-        FlowRow(horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+        FlowRow(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
             distractions.forEach { d ->
                 FilterChip(
                     selected = trying == d,
@@ -218,12 +224,6 @@ private fun Running(
                     colors = FilterChipDefaults.filterChipColors(selectedContainerColor = MaterialTheme.colorScheme.secondaryContainer),
                 )
             }
-        }
-
-        Spacer(Modifier.height(8.dp))
-        Row(Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-            QuietButton(if (timer.isPaused) "Resume" else "Pause", if (timer.isPaused) onResume else onPause, Modifier.weight(1f))
-            QuietButton("I'm done", onDone, Modifier.weight(1f))
         }
     }
 }
@@ -236,19 +236,21 @@ private fun CountdownRing(progress: Float, label: String, paused: Boolean) {
     // Grow with the font size so large text never spills out of the ring.
     val ring = 240.dp * LocalDensity.current.fontScale.coerceIn(1f, 1.8f)
     Box(
-        Modifier.size(ring).semantics {
+        // Always a circle: as wide as it wants up to the screen width, and square.
+        Modifier.widthIn(max = ring).fillMaxWidth().aspectRatio(1f).semantics {
             contentDescription = "Time left"
             stateDescription = if (paused) "$label, paused" else label
         },
         contentAlignment = Alignment.Center,
     ) {
-        Canvas(Modifier.size(ring)) {
+        Canvas(Modifier.fillMaxSize()) {
             val w = 6.dp.toPx()
-            drawCircle(track, radius = size.minDimension / 2 - w, style = Stroke(w / 3))
+            val d = size.minDimension - 2 * w
+            val corner = androidx.compose.ui.geometry.Offset((size.width - d) / 2, (size.height - d) / 2)
+            drawCircle(track, radius = d / 2, style = Stroke(w / 3))
             drawArc(
                 ink, startAngle = -90f, sweepAngle = 360f * (1f - progress), useCenter = false,
-                topLeft = androidx.compose.ui.geometry.Offset(w, w),
-                size = androidx.compose.ui.geometry.Size(size.width - 2 * w, size.height - 2 * w),
+                topLeft = corner, size = androidx.compose.ui.geometry.Size(d, d),
                 style = Stroke(w, cap = StrokeCap.Round),
             )
         }

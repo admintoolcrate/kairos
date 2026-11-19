@@ -69,7 +69,7 @@ class PanicSafetyTest {
         compose.onNodeWithText("Ground").performClick()
         compose.settle()
         compose.onNodeWithText("Name something you can see.").assertExists()
-        compose.onNodeWithText("1 of 5, things you can see").assertExists()
+        compose.onNodeWithText("1 of 5 things you can see").assertExists()
         repeat(15) {
             compose.onNodeWithText("Next").performClick()
             compose.settle(2)

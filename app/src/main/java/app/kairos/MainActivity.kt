@@ -19,6 +19,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.compose.rememberNavController
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.lifecycle.lifecycleScope
 import app.kairos.data.Prefs
 import app.kairos.data.SessionRepository
@@ -77,10 +78,19 @@ class MainActivity : FragmentActivity() {
             val scope = rememberCoroutineScope()
             KairosTheme(settings?.theme ?: ThemeMode.System, settings?.motion ?: MotionPref.System) {
                 Surface(Modifier.fillMaxSize()) {
+                    // From a widget, tile or shortcut: straight to Home and on. From the launcher:
+                    // wait the few ms for settings, so a first run opens on the welcome, not Home.
+                    val start = when {
+                        !launchedPlain -> Routes.Home
+                        settings == null -> return@Surface
+                        settings?.onboardingDone == false -> Routes.Onboarding
+                        else -> Routes.Home
+                    }
+                    val first = rememberSaveable { start }
                     val nav = rememberNavController()
                     val stagiraInstalled = remember { StagiraBridge.isAvailable(this@MainActivity) }
                     KairosNav(
-                        nav, Routes.Home,
+                        nav, first,
                         onPanic = ::openPanic,
                         onOnboarded = { scope.launch { prefs.update { it.copy(onboardingDone = true) } } },
                         stagira = if (stagiraInstalled && settings?.stagira == true) StagiraOffer(::recordInStagira) else null,
@@ -89,13 +99,6 @@ class MainActivity : FragmentActivity() {
                     LaunchedEffect(pending) {
                         pending?.let { nav.navigate(it) { launchSingleTop = true } }
                         pending = null
-                    }
-                    // First run from the launcher: a short welcome. Never in the way of a widget or tile.
-                    LaunchedEffect(settings?.onboardingDone) {
-                        if (launchedPlain && settings?.onboardingDone == false) {
-                            launchedPlain = false
-                            nav.navigate(Routes.Onboarding) { popUpTo(Routes.Home) { inclusive = true } }
-                        }
                     }
                 }
             }

@@ -61,7 +61,7 @@ class Screenshots {
         }
     }
 
-    private fun main() = ActivityScenario.launch<MainActivity>(Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java))
+    private fun main() = ActivityScenario.launch<MainActivity>(Intent(ApplicationProvider.getApplicationContext(), MainActivity::class.java)).also { compose.settle() }
     private fun panic() = ActivityScenario.launch<PanicActivity>(PanicActivity.intent(ApplicationProvider.getApplicationContext()))
     private fun tap(text: String) { compose.onNodeWithText(text).performClick(); compose.settle() }
     private fun withContacts() = runBlocking { contacts.add("Sam", "+44 7700 900123"); contacts.add("Mum", "+44 7700 900456") }

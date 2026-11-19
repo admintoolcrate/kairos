@@ -113,9 +113,8 @@ fun BreathingGuide(
         )
         if (showCount) {
             Spacer(Modifier.height(8.dp))
-            val secs = if (frame.phase == BreathingPhase.Inhale) pattern.inhaleSeconds else pattern.exhaleSeconds
             Text(
-                "${frame.secondsLeftInPhase} of $secs",
+                "${frame.secondsLeftInPhase}",
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                 // The count changes every second; TalkBack hears only the phase words.

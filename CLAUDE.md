@@ -73,6 +73,13 @@ headings (display/headline/titleLarge), Inter for body and labels. Fonts are OFL
 
 ## Workflow
 - Before every commit: `./gradlew assembleDebug testDebugUnitTest` must pass.
+- Behaviour tests in `app/src/test/.../ui` drive the real activities under Robolectric + Hilt
+  (panic never locked, no breath hold, check-in skippable, settings locked, urge flow).
+  The Compose clock is manual (`mainClock.autoAdvance = false`) because the breathing
+  guide animates forever; use `settle()` from `ui/Harness.kt` after each action.
+- After visual changes, draw and look at the screens (light, dark, 2x font):
+  `./gradlew testDebugUnitTest -Pscreenshots=true --tests 'app.kairos.screenshots.*'`
+  → `app/build/screenshots/`.
 - Commit after each milestone on branch `claude/kairos-android-architecture-ap2l0b`.
 - The SDK path comes from `local.properties` (`sdk.dir=`), which is git-ignored.
 

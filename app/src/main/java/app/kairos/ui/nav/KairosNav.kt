@@ -12,7 +12,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import app.kairos.backup.BackupScreen
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import app.kairos.lock.LockGate
+import app.kairos.ui.theme.LocalReducedMotion
 import app.kairos.ui.history.HistoryScreen
 import app.kairos.ui.home.HomeScreen
 import app.kairos.ui.onboarding.OnboardingScreen
@@ -59,7 +63,13 @@ fun KairosNav(
         LockGate(vm.lock, secrets, onBack = back) { content(vm) }
     }
 
-    NavHost(nav, startDestination = start) {
+    val reduced = LocalReducedMotion.current
+    val ms = if (reduced) 0 else 180
+    NavHost(
+        nav, startDestination = start,
+        enterTransition = { fadeIn(tween(ms)) }, exitTransition = { fadeOut(tween(ms)) },
+        popEnterTransition = { fadeIn(tween(ms)) }, popExitTransition = { fadeOut(tween(ms)) },
+    ) {
         composable(Routes.Home) {
             HomeScreen(
                 onUrge = { nav.navigate(Routes.urge()) },

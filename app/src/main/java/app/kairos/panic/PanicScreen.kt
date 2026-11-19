@@ -30,6 +30,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.liveRegion
@@ -107,7 +108,17 @@ private fun PageBar(current: PanicPage, onGo: (PanicPage) -> Unit) {
                 border = if (on) BorderStroke(1.dp, MaterialTheme.colorScheme.secondary) else null,
             ) {
                 Box(contentAlignment = Alignment.Center) {
-                    Text(p.label, style = MaterialTheme.typography.titleMedium, color = MaterialTheme.colorScheme.onSurface)
+                    // Four labels share one row: let them grow with the font size only so far,
+                    // so a word is never broken in two. The pages themselves scale fully.
+                    val scale = LocalDensity.current.fontScale
+                    val base = MaterialTheme.typography.titleMedium
+                    Text(
+                        p.label,
+                        style = base.copy(fontSize = base.fontSize * (minOf(scale, 1.3f) / scale)),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        softWrap = false,
+                    )
                 }
             }
         }
@@ -158,7 +169,7 @@ private fun GroundingPrompt.counter(): String {
         Sense.Smell -> "you can smell"
         Sense.Taste -> "you can taste"
     }
-    return "$item of $count, things $noun"
+    return "$item of $count things $noun"
 }
 
 @Composable
