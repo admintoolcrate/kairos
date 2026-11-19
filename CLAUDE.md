@@ -87,6 +87,18 @@ headings (display/headline/titleLarge), Inter for body and labels. Fonts are OFL
 - Commit after each milestone on branch `claude/kairos-android-architecture-ap2l0b`.
 - The SDK path comes from `local.properties` (`sdk.dir=`), which is git-ignored.
 
+## Releasing
+- Play steps, policy answers and what only the owner can do: `docs/play-store/RELEASE.md`.
+  Privacy policy, Data safety and store listing drafts sit beside it; keep them true to the
+  code (if the app starts storing or sending something new, update them in the same change).
+- `versionCode` comes from the CI run number; bump `versionName` by hand.
+- Signing: `keystore.properties` locally or the `UPLOAD_*` GitHub secrets. `app/debug.keystore`
+  is a public debug-only key (password `android`) so Drive sign-in can be registered for
+  debug builds; never sign a release with it.
+- Store screenshots (1080x1920): `--tests 'app.kairos.screenshots.StoreScreenshots'`
+  with `-Pscreenshots=true`, then copy `app/build/store-screenshots/` to
+  `docs/play-store/screenshots/`.
+
 ## Stagira bridge (contract)
 - Kairos sends an explicit intent: action `cc.toolcrate.stagira.action.RECORD_URGE`,
   package `cc.toolcrate.stagira`, extras `source` = `"kairos"`, `at` = epoch millis.

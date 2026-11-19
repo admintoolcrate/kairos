@@ -1,6 +1,6 @@
 # Kairos
 
-A calm, free, offline companion for riding out urges, cravings and moments of panic.
+Calm tools for urges, cravings and panic. Free, offline, no ads, no accounts.
 
 - **Urge mode** — a 10 or 20 minute countdown with a calm message, a short breathing
   guide and a few distractions. Afterwards, note whether the urge passed.
