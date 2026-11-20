@@ -1,0 +1,13 @@
+# GitHub Pages (Settings → Pages → Deploy from a branch → main, /docs). Hosts the privacy policy Play needs.
+title: Kairos
+description: Calm tools for hard moments.
+theme: jekyll-theme-minimal
+plugins:
+  - jekyll-sitemap
+  - jekyll-redirect-from
+# Drafting notes for Play Console and the design notes aren't pages anyone needs to visit.
+exclude:
+  - play-store/RELEASE.md
+  - play-store/data-safety.md
+  - play-store/store-listing.md
+  - family-look.md
