@@ -42,7 +42,7 @@ fun CheckIn(onAnswer: (Int?) -> Unit, modifier: Modifier = Modifier, question: S
                 OutlinedButton(
                     onClick = { onAnswer(n) },
                     modifier = Modifier.weight(1f).heightIn(min = 64.dp).semantics { contentDescription = "$n, ${labels[n]}" },
-                    shape = CardShape,
+                    shape = TileShape,
                 ) { Text("$n", style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.onBackground) }
             }
         }

@@ -3,7 +3,7 @@
 Rules for all store text: no medical claims, no diagnosis, no "treats", "cures", "therapy",
 "clinically", and no promises that a feeling will pass. Describe what the app does.
 
-**App name** (max 30): `Kairos`
+**App name** (max 30): `Kairos – Calm Tools` (family format, docs/family-look.md)
 
 **Short description** (max 80):
 `Calm tools for hard moments. Free, offline, no ads, no accounts.`
@@ -39,5 +39,5 @@ Rules for all store text: no medical claims, no diagnosis, no "treats", "cures",
 **Contact email:** admin.toolcrate@gmail.com
 **Privacy policy:** the public URL of `privacy-policy.md` (RELEASE.md, step 5)
 
-**Graphics** (in `graphics/` and `screenshots/`): icon 512×512, feature graphic 1024×500,
-phone screenshots 1080×1920.
+**Graphics** (in `graphics/` and `screenshots/`): icon 512×512 and feature graphic 1024×500
+(from `tools/family_graphics.py`), phone screenshots 1080×1920.

@@ -45,13 +45,14 @@ import app.kairos.engine.GroundingWalkthrough
 import app.kairos.engine.Sense
 import app.kairos.data.ContactEntity
 import app.kairos.ui.components.BreathingGuide
-import app.kairos.ui.components.CardShape
+import app.kairos.ui.components.TileShape
 import app.kairos.ui.components.CheckIn
 import app.kairos.ui.components.LinkButton
 import app.kairos.ui.components.PrimaryButton
 import app.kairos.ui.components.QuietButton
 import app.kairos.ui.theme.LocalReducedMotion
 import app.kairos.ui.theme.PanicText
+import app.kairos.ui.theme.capped
 import kotlinx.coroutines.launch
 
 @Composable
@@ -103,7 +104,7 @@ private fun PageBar(current: PanicPage, onGo: (PanicPage) -> Unit) {
             Surface(
                 onClick = { onGo(p) },
                 modifier = Modifier.weight(1f).heightIn(min = 64.dp).semantics { selected = on },
-                shape = CardShape,
+                shape = TileShape,
                 color = if (on) MaterialTheme.colorScheme.secondaryContainer else MaterialTheme.colorScheme.surface,
                 border = if (on) BorderStroke(1.dp, MaterialTheme.colorScheme.secondary) else null,
             ) {
@@ -147,7 +148,7 @@ private fun BreathePage(vm: PanicViewModel) {
             textAlign = TextAlign.Center,
         )
         Spacer(Modifier.height(24.dp))
-        BreathingGuide(pattern = pattern, haptics = settings.haptics, circleSize = 260.dp, phaseStyle = PanicText.Phase)
+        BreathingGuide(pattern = pattern, haptics = settings.haptics, circleSize = 260.dp, phaseStyle = PanicText.Phase.capped(1.5f))
         Spacer(Modifier.height(24.dp))
         QuietButton("Next: grounding", { vm.go(PanicPage.Ground) }, style = PanicText.Button)
     }

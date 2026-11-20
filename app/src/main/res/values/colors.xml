@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="paper_page">#F4EDE0</color>
-    <color name="paper_ink">#2A211C</color>
-    <color name="paper_night_page">#1B1613</color>
-    <color name="paper_night_ink">#EDE4D3</color>
-    <color name="page">@color/paper_page</color>
-    <color name="ink">@color/paper_ink</color>
+    <!-- Mono, the ToolCrate family palette (docs/family-look.md). -->
+    <color name="mono_page">#FFFFFF</color>
+    <color name="mono_ink">#111111</color>
+    <color name="mono_night_page">#000000</color>
+    <color name="mono_night_ink">#FFFFFF</color>
+    <color name="mono_mark_ground">#111111</color>
+    <color name="page">@color/mono_page</color>
+    <color name="ink">@color/mono_ink</color>
 </resources>

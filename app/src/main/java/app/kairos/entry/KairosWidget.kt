@@ -30,7 +30,7 @@ import androidx.glance.text.Text
 import androidx.glance.text.TextStyle
 import app.kairos.MainActivity
 import app.kairos.panic.PanicActivity
-import app.kairos.ui.theme.Paper
+import app.kairos.ui.theme.Mono
 
 /** Two big buttons on the home screen, each one tap from the right place. */
 class KairosWidget : GlanceAppWidget() {
@@ -40,12 +40,12 @@ class KairosWidget : GlanceAppWidget() {
         val urge = MainActivity.urgeIntent(context)
         val panic = PanicActivity.intent(context)
         provideContent {
-            val page = ColorProvider(day = Paper.Page, night = Paper.NightPage)
-            val card = ColorProvider(day = Paper.Card, night = Paper.NightCard)
-            val ink = ColorProvider(day = Paper.Ink, night = Paper.NightInk)
-            val muted = ColorProvider(day = Paper.Muted, night = Paper.NightMuted)
+            val page = ColorProvider(day = Mono.Page, night = Mono.NightPage)
+            val card = ColorProvider(day = Mono.Card, night = Mono.NightCard)
+            val ink = ColorProvider(day = Mono.Ink, night = Mono.NightInk)
+            val muted = ColorProvider(day = Mono.Muted, night = Mono.NightMuted)
             Row(
-                GlanceModifier.fillMaxSize().background(page).cornerRadius(20.dp).padding(6.dp),
+                GlanceModifier.fillMaxSize().background(page).cornerRadius(24.dp).padding(6.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Cell("An urge", "Ride it out", card, ink, muted,
@@ -68,7 +68,7 @@ class KairosWidget : GlanceAppWidget() {
         muted: androidx.glance.unit.ColorProvider,
         modifier: GlanceModifier,
     ) {
-        Box(modifier.fillMaxHeight().background(bg).cornerRadius(16.dp).padding(12.dp), contentAlignment = Alignment.CenterStart) {
+        Box(modifier.fillMaxHeight().background(bg).cornerRadius(18.dp).padding(12.dp), contentAlignment = Alignment.CenterStart) {
             Column {
                 Text(title, style = TextStyle(color = ink, fontSize = 22.sp, fontFamily = FontFamily.Serif))
                 Text(sub, style = TextStyle(color = muted, fontSize = 13.sp))

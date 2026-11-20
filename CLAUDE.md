@@ -20,7 +20,7 @@ and **Panic** (paced breathing, 5-4-3-2-1 grounding, reassurance cards, call som
 ## Tone and safety rules (enforced in review)
 - Nothing that raises anxiety: no loud or sudden sounds, no red, no alert styling, no
   shaking/flashing, no "hurry" language, no countdown that turns urgent near zero.
-  The colour scheme's `error` role is a muted umber on purpose; do not add red.
+  The colour scheme's `error` role is ink on purpose; do not add red.
 - **Breathing never includes a hold.** `BreathingPhase` has only `Inhale` and `Exhale`.
   Exhale is always longer than inhale (default 4 in / 6 out); `BreathingEngine`
   enforces this. Don't add a hold phase, even as an option.
@@ -71,9 +71,12 @@ AGP 8.11, Gradle 8.14, compile/target SDK 36, **min SDK 26**. Versions live in
 - `ui/` — theme and feature screens (home, urge, checkin, onboarding, settings, history).
 
 ## Look
-"Paper" palette: warm cream page, brown-black ink, light and dark. EB Garamond for
-headings (display/headline/titleLarge), Inter for body and labels. Fonts are OFL
-(licences in `third_party/`). Calm, bookish, generous whitespace, hairline dividers.
+Kairos follows the ToolCrate family look shared with Stagira, Lyceum and Telos:
+**read `docs/family-look.md`** (the same file in all four repos; change it in all four).
+In short: Mono palette (`ui/theme/Color.kt`: black on white, true black at night, no red),
+EB Garamond only for display moments (name, timer, panic text, passages, `ScreenTitle`),
+Inter for everything else, 24 dp cards and pill buttons, hairline dividers. Fonts are OFL
+(licences in `third_party/`). Play icon and feature graphic come from `tools/family_graphics.py`.
 
 ## Workflow
 - Before every commit: `./gradlew assembleDebug testDebugUnitTest` must pass.

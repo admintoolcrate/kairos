@@ -11,7 +11,7 @@ Kairos runs on real phones, so use it for the on-device checks at the end.
 ## 1. Create the app (you)
 
 In [Play Console](https://play.google.com/console) (the ToolCrate account): **Create app** →
-name *Kairos*, **App**, **Free**. The package name `cc.toolcrate.kairos` is fixed
+name *Kairos – Calm Tools*, **App**, **Free**. The package name `cc.toolcrate.kairos` is fixed
 forever once the first bundle is uploaded.
 
 ## 2. Upload key (you, once)

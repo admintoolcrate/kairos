@@ -1,5 +1,6 @@
 package app.kairos.ui.settings
 
+import app.kairos.ui.theme.ScreenTitle
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -32,7 +33,6 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
 import androidx.compose.foundation.selection.toggleable
 import androidx.compose.ui.unit.dp
-import app.kairos.ui.components.CardShape
 import app.kairos.ui.components.Heading
 import app.kairos.ui.components.LinkButton
 
@@ -43,7 +43,7 @@ fun SettingsPage(title: String, onBack: () -> Unit, content: @Composable ColumnS
         verticalArrangement = Arrangement.spacedBy(12.dp),
     ) {
         LinkButton("Back", onBack)
-        Heading(title, style = MaterialTheme.typography.displaySmall)
+        Heading(title, style = ScreenTitle)
         Spacer(Modifier.height(4.dp))
         content()
         Spacer(Modifier.height(32.dp))
@@ -111,7 +111,7 @@ fun <T> ChoiceRow(options: List<Pair<T, String>>, selected: T, onSelect: (T) -> 
 fun Stepper(label: String, value: Int, onChange: (Int) -> Unit, unit: String = "seconds") {
     Row(Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically) {
         Text(label, style = MaterialTheme.typography.titleMedium, modifier = Modifier.weight(1f), color = MaterialTheme.colorScheme.onBackground)
-        OutlinedButton({ onChange(value - 1) }, Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Shorter $label" }, shape = CardShape) {
+        OutlinedButton({ onChange(value - 1) }, Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Shorter $label" }) {
             Text("−", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onBackground)
         }
         Text(
@@ -120,7 +120,7 @@ fun Stepper(label: String, value: Int, onChange: (Int) -> Unit, unit: String = "
             modifier = Modifier.padding(horizontal = 16.dp).semantics { stateDescription = "$value $unit" },
             color = MaterialTheme.colorScheme.onBackground,
         )
-        OutlinedButton({ onChange(value + 1) }, Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Longer $label" }, shape = CardShape) {
+        OutlinedButton({ onChange(value + 1) }, Modifier.heightIn(min = 48.dp).semantics { contentDescription = "Longer $label" }) {
             Text("+", style = MaterialTheme.typography.titleLarge, color = MaterialTheme.colorScheme.onBackground)
         }
     }

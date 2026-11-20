@@ -1,13 +1,13 @@
 package app.kairos.ui
 
 import androidx.compose.ui.graphics.Color
-import app.kairos.ui.theme.Paper
+import app.kairos.ui.theme.Mono
 import org.junit.Assert.assertFalse
 import org.junit.Test
 import kotlin.math.max
 import kotlin.math.min
 
-/** "No red alerts": nothing in the Paper palette is a saturated red. */
+/** "No red alerts": nothing in the Mono palette is a saturated red. */
 class PaletteTest {
     private fun hueAndSaturation(c: Color): Pair<Float, Float> {
         val r = c.red; val g = c.green; val b = c.blue
@@ -22,11 +22,11 @@ class PaletteTest {
     }
 
     @Test fun `no colour in the palette is a saturated red`() {
-        val all = Paper::class.java.declaredFields.filter { it.type == Long::class.javaPrimitiveType }.map {
+        val all = Mono::class.java.declaredFields.filter { it.type == Long::class.javaPrimitiveType }.map {
             it.isAccessible = true
-            it.name to Color(it.getLong(Paper).toULong())
+            it.name to Color(it.getLong(Mono).toULong())
         }
-        check(all.size >= 20) { "expected the Paper colours, found ${all.size}" }
+        check(all.size >= 20) { "expected the Mono colours, found ${all.size}" }
         all.forEach { (name, c) ->
             val (h, s) = hueAndSaturation(c)
             val red = (h < 15f || h > 345f) && s > 0.45f

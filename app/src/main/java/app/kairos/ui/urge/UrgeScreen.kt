@@ -43,7 +43,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -58,7 +57,9 @@ import app.kairos.ui.components.Heading
 import app.kairos.ui.components.LinkButton
 import app.kairos.ui.components.PrimaryButton
 import app.kairos.ui.components.QuietButton
+import app.kairos.ui.theme.KairosType
 import app.kairos.ui.theme.LocalReducedMotion
+import app.kairos.ui.theme.capped
 import kotlinx.coroutines.delay
 
 @Composable
@@ -176,7 +177,7 @@ private fun Running(
         ) { text ->
             Text(
                 text,
-                style = MaterialTheme.typography.headlineSmall.copy(fontStyle = FontStyle.Italic),
+                style = KairosType.passage,
                 textAlign = TextAlign.Center,
                 color = MaterialTheme.colorScheme.onBackground,
                 modifier = Modifier.fillMaxWidth(),
@@ -255,7 +256,7 @@ private fun CountdownRing(progress: Float, label: String, paused: Boolean) {
             )
         }
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-            Text(label, style = MaterialTheme.typography.displayLarge, color = MaterialTheme.colorScheme.onBackground)
+            Text(label, style = MaterialTheme.typography.displayLarge.capped(), color = MaterialTheme.colorScheme.onBackground)
             if (paused) Text("Paused", style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }

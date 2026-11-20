@@ -26,7 +26,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
-val CardShape = RoundedCornerShape(20.dp)
+/** Family shapes (docs/family-look.md): cards 24 dp, small tiles 14 dp, buttons Material's pill. */
+val CardShape = RoundedCornerShape(24.dp)
+val TileShape = RoundedCornerShape(14.dp)
 
 @Composable
 fun Heading(text: String, modifier: Modifier = Modifier, style: TextStyle = MaterialTheme.typography.headlineMedium, center: Boolean = false) {
@@ -44,7 +46,6 @@ fun PrimaryButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifi
     Button(
         onClick = onClick,
         modifier = modifier.fillMaxWidth().heightIn(min = 56.dp),
-        shape = CardShape,
         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
     ) { Text(text, style = style, textAlign = TextAlign.Center) }
@@ -55,7 +56,6 @@ fun QuietButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier
     OutlinedButton(
         onClick = onClick,
         modifier = modifier.fillMaxWidth().heightIn(min = 56.dp),
-        shape = CardShape,
         border = BorderStroke(1.dp, MaterialTheme.colorScheme.outline),
         contentPadding = PaddingValues(horizontal = 24.dp, vertical = 14.dp),
     ) { Text(text, style = style, color = MaterialTheme.colorScheme.onBackground, textAlign = TextAlign.Center) }
