@@ -15,4 +15,4 @@ Kairos is a self-help tool. It isn't medical care, and it can't diagnose or trea
 If you have chest pain, trouble breathing, or think you may be in danger, call your local
 emergency number.
 
-[Privacy policy](privacy/)
+[Privacy policy](privacy/) · [Delete your data](delete-data/)
