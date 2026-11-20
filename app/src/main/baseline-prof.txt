@@ -1,0 +1,11 @@
+HSPLapp/kairos/KairosApp;->**(**)**
+HSPLapp/kairos/Hilt_KairosApp;->**(**)**
+HSPLapp/kairos/MainActivity;->**(**)**
+HSPLapp/kairos/panic/**;->**(**)**
+HSPLapp/kairos/ui/components/**;->**(**)**
+HSPLapp/kairos/ui/theme/**;->**(**)**
+HSPLapp/kairos/ui/home/**;->**(**)**
+HSPLapp/kairos/ui/urge/**;->**(**)**
+HSPLapp/kairos/engine/**;->**(**)**
+HSPLapp/kairos/data/Prefs**;->**(**)**
+Lapp/kairos/**;

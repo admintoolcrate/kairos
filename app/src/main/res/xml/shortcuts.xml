@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="panic"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_panic"
+        android:shortcutShortLabel="@string/shortcut_panic_short"
+        android:shortcutLongLabel="@string/shortcut_panic_long">
+        <intent
+            android:action="app.kairos.PANIC"
+            android:targetPackage="cc.toolcrate.kairos"
+            android:targetClass="app.kairos.panic.PanicActivity" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="urge10"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_urge"
+        android:shortcutShortLabel="@string/shortcut_urge10_short"
+        android:shortcutLongLabel="@string/shortcut_urge10_long">
+        <intent
+            android:action="app.kairos.URGE"
+            android:targetPackage="cc.toolcrate.kairos"
+            android:targetClass="app.kairos.MainActivity">
+            <extra android:name="app.kairos.START" android:value="urge" />
+            <extra android:name="app.kairos.MINUTES" android:value="10" />
+        </intent>
+    </shortcut>
+    <shortcut
+        android:shortcutId="urge20"
+        android:enabled="true"
+        android:icon="@drawable/ic_shortcut_urge"
+        android:shortcutShortLabel="@string/shortcut_urge20_short"
+        android:shortcutLongLabel="@string/shortcut_urge20_long">
+        <intent
+            android:action="app.kairos.URGE"
+            android:targetPackage="cc.toolcrate.kairos"
+            android:targetClass="app.kairos.MainActivity">
+            <extra android:name="app.kairos.START" android:value="urge" />
+            <extra android:name="app.kairos.MINUTES" android:value="20" />
+        </intent>
+    </shortcut>
+</shortcuts>

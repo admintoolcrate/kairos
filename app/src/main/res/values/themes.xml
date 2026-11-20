@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Kairos" parent="android:Theme.Material.Light.NoActionBar">
+        <item name="android:windowBackground">@color/page</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <!-- Splash: just the page colour and the mark; no delay is added. -->
+    <style name="Theme.Kairos.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenBackground">@color/page</item>
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_mark</item>
+        <item name="postSplashScreenTheme">@style/Theme.Kairos</item>
+    </style>
+    <!-- Panic opens straight to content: no splash icon, page colour only. -->
+    <style name="Theme.Kairos.Panic" parent="Theme.Kairos">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+</resources>
