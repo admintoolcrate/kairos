@@ -1,5 +1,9 @@
 ---
-title: Kairos privacy policy
+title: Privacy policy
+permalink: /privacy/
+redirect_from:
+  - /play-store/privacy-policy
+  - /play-store/privacy-policy.html
 ---
 
 # Kairos privacy policy

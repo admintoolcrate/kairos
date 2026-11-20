@@ -80,7 +80,7 @@ don't misdeclare.
 
 Play needs it at a public web address. Simplest: in this repo, **Settings → Pages → Deploy from
 branch**, branch `main`, folder `/docs`. The policy is then at
-`https://admintoolcrate.github.io/kairos/play-store/privacy-policy` (or a custom domain such as
+`https://admintoolcrate.github.io/kairos/privacy/` (or a custom domain such as
 `kairos.toolcrate.cc`, like Stagira's). This needs the work merged into `main`.
 
 ## 6. Google Drive backup (you, only if testers should try it)
