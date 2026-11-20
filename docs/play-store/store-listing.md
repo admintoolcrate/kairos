@@ -37,7 +37,7 @@ Rules for all store text: no medical claims, no diagnosis, no "treats", "cures",
 
 **Category:** Health & Fitness (or Lifestyle; see RELEASE.md, Health apps)
 **Contact email:** admin.toolcrate@gmail.com
-**Privacy policy:** `https://admintoolcrate.github.io/kairos/privacy/` (RELEASE.md, step 5)
+**Privacy policy:** `https://kairos.toolcrate.cc/privacy/` (RELEASE.md, step 5)
 
 **Graphics** (in `graphics/` and `screenshots/`): icon 512×512 and feature graphic 1024×500
 (from `tools/family_graphics.py`), phone screenshots 1080×1920.
