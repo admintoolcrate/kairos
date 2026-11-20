@@ -78,10 +78,15 @@ don't misdeclare.
 
 ## 5. Privacy policy URL (you)
 
-Play needs it at a public web address. Simplest: in this repo, **Settings → Pages → Deploy from
-branch**, branch `main`, folder `/docs`. The policy is then at
-`https://admintoolcrate.github.io/kairos/privacy/` (or a custom domain such as
-`kairos.toolcrate.cc`, like Stagira's). This needs the work merged into `main`.
+Play needs it at a public web address. `docs/` is the Kairos website (kairos.toolcrate.cc), which
+also carries the policy:
+
+1. In this repo, **Settings → Pages → Deploy from a branch**, branch `main`, folder `/docs`.
+   This needs the work merged into `main`.
+2. At the DNS provider for toolcrate.cc, add a `CNAME` record: `kairos` → `admintoolcrate.github.io`.
+   (`docs/CNAME` already names the domain.) Once it resolves, tick **Enforce HTTPS** under Pages.
+3. The policy is then at `https://kairos.toolcrate.cc/privacy/`, and the delete-your-data page at
+   `https://kairos.toolcrate.cc/delete-data/`.
 
 ## 6. Google Drive backup (you, only if testers should try it)
 

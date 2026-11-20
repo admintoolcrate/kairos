@@ -2,6 +2,8 @@
 
 Calm tools for hard moments. Free, offline, no ads, no accounts.
 
+Website: https://kairos.toolcrate.cc (source in `docs/`).
+
 - **Urge mode** — a 10 or 20 minute countdown with a calm message, a short breathing
   guide and a few distractions. Afterwards, note whether the urge passed.
 - **Panic mode** — slow paced breathing (longer out than in, never holding), a 5-4-3-2-1
